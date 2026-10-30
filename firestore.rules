@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      // Só usuários autenticados. Para restringir por e-mail, troque por:
+      // allow read, write: if request.auth != null && request.auth.token.email in ['seu@email.com'];
+      allow read, write: if request.auth != null;
+    }
+  }
+}
